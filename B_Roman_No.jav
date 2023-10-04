@@ -1,28 +1,18 @@
-import java.util.HashMap;
+import java.util.Scanner;
 
 public class RomanToInteger {
     public static void main(String[] args) {
-        String romanNumeral = "XII"; 
-        int result = romanToInt(romanNumeral);
-        System.out.println( result);
-    }
-
-    public static int romanToInt(String s) {
-        HashMap<Character, Integer> romanValues = new HashMap<>();
-        romanValues.put('I', 1);
-        romanValues.put('V', 5);
-        romanValues.put('X', 10);
-        romanValues.put('L', 50);
-        romanValues.put('C', 100);
-        romanValues.put('D', 500);
-        romanValues.put('M', 1000);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a Roman numeral: ");
+        String roman = scanner.nextLine().toUpperCase();
+        scanner.close();
 
         int result = 0;
         int prevValue = 0;
 
-        for (int i = s.length() - 1; i >= 0; i--) {
-            char currentChar = s.charAt(i);
-            int currentValue = romanValues.get(currentChar);
+        for (int i = roman.length() - 1; i >= 0; i--) {
+            char currentChar = roman.charAt(i);
+            int currentValue = getValue(currentChar);
 
             if (currentValue < prevValue) {
                 result -= currentValue;
@@ -33,6 +23,29 @@ public class RomanToInteger {
             prevValue = currentValue;
         }
 
-        return result;
+        System.out.println("Integer equivalent: " + result);
+    }
+
+    public static int getValue(char romanDigit) {
+        switch (romanDigit) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                throw new IllegalArgumentException("Invalid Roman numeral");
+        }
     }
 }
+
+
