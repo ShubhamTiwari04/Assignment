@@ -1,25 +1,18 @@
-function reverseWordsInSentence(sentence) {
-    let reversedSentence = '';
-    let wordStart = 0;
+function reverseWords(sentence) {
+    const words = sentence.split(' ');
+    const reversedWords = [];
 
-    for (let i = 0; i < sentence.length; i++) {
-        if (sentence[i] === ' ' || i === sentence.length - 1) {
-            let wordEnd = (i === sentence.length - 1) ? i : i - 1;
-            let word = '';
-
-            for (let j = wordStart; j <= wordEnd; j++) {
-                word = sentence[j] + word;
-            }
-
-            reversedSentence += word + ' ';
-            wordStart = i + 1;
+    for (const word of words) {
+        let reversedWord = '';
+        for (let i = word.length - 1; i >= 0; i--) {
+            reversedWord += word[i];
         }
+        reversedWords.push(reversedWord);
     }
 
-    return reversedSentence.trim(); // Remove trailing space
+    return reversedWords.join(' ');
 }
 
-// Example usage:
-const inputSentence = "This is a sunny day";
-const reversedSentence = reverseWordsInSentence(inputSentence);
-console.log(reversedSentence); 
+const inputSentence = prompt("Enter a sentence:");
+const reversedSentence = reverseWords(inputSentence);
+console.log(reversedSentence);
